@@ -2,17 +2,19 @@
 #include <omp.h>
 
 int main() {
+    // omp_set_num_threads(1);
+    int loop = 10; // jumlah loop
     double start_time = omp_get_wtime(); // Mulai pengukuran waktu
 
     #pragma omp parallel
     {
         #pragma omp single
         {
-            int dep1 = 0, dep2 = 0, dep3 = 0, dep4 = 0, dep5 = 0; //dependensi berurutan
+            int dep1 = 0, dep2 = 0, dep3 = 0, dep4 = 0, dep5 = 0; // Dependensi berurutan
 
             #pragma omp task depend(out: dep1)
             {
-                for (int i = 1; i <= 10; i++) {
+                for (int i = 1; i <= loop; i++) {
                     printf("Task 1 - Loop iteration: %d by thread %d\n", i, omp_get_thread_num());
                 }
                 printf("Task 1 completed by thread %d\n", omp_get_thread_num());
@@ -20,7 +22,7 @@ int main() {
 
             #pragma omp task depend(in: dep1) depend(out: dep2)
             {
-                for (int i = 1; i <= 10; i++) {
+                for (int i = 1; i <= loop; i++) {
                     printf("Task 2 - Loop iteration: %d by thread %d\n", i, omp_get_thread_num());
                 }
                 printf("Task 2 completed by thread %d\n", omp_get_thread_num());
@@ -28,7 +30,7 @@ int main() {
 
             #pragma omp task depend(in: dep2) depend(out: dep3)
             {
-                for (int i = 1; i <= 10; i++) {
+                for (int i = 1; i <= loop; i++) {
                     printf("Task 3 - Loop iteration: %d by thread %d\n", i, omp_get_thread_num());
                 }
                 printf("Task 3 completed by thread %d\n", omp_get_thread_num());
@@ -36,7 +38,7 @@ int main() {
 
             #pragma omp task depend(in: dep3) depend(out: dep4)
             {
-                for (int i = 1; i <= 10; i++) {
+                for (int i = 1; i <= loop; i++) {
                     printf("Task 4 - Loop iteration: %d by thread %d\n", i, omp_get_thread_num());
                 }
                 printf("Task 4 completed by thread %d\n", omp_get_thread_num());
@@ -44,7 +46,7 @@ int main() {
 
             #pragma omp task depend(in: dep4) depend(out: dep5)
             {
-                for (int i = 1; i <= 10; i++) {
+                for (int i = 1; i <= loop; i++) {
                     printf("Task 5 - Loop iteration: %d by thread %d\n", i, omp_get_thread_num());
                 }
                 printf("Task 5 completed by thread %d\n", omp_get_thread_num());

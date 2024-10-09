@@ -1,28 +1,45 @@
 #include <stdio.h>
 #include <time.h>
 
-void perform_task(int task_num, int iterations) {
-    for (int i = 1; i <= iterations; i++) {
-        printf("Task %d - Loop iteration: %d\n", task_num, i);
-    }
-    printf("Task %d completed\n", task_num);
-}
-
 int main() {
-    clock_t start = clock(); // Mulai pengukuran waktu
+    int loop = 10; // Jumlah Loop
+    clock_t start_time = clock(); // Mulai pengukuran waktu
 
-    // Eksekusi tasks secara berurutan
-    perform_task(1, 1000);
-    perform_task(2, 1000);
-    perform_task(3, 1000);
-    perform_task(4, 1000);
-    perform_task(5, 1000);
+    // Task 1
+    for (int i = 1; i <= loop; i++) {
+        printf("Task 1 - Loop iteration: %d\n", i);
+    }
+    printf("Task 1 completed\n");
 
-    printf("All serial tasks completed.\n");
+    // Task 2
+    for (int i = 1; i <= loop; i++) {
+        printf("Task 2 - Loop iteration: %d\n", i);
+    }
+    printf("Task 2 completed\n");
 
-    clock_t end = clock(); // Akhiri pengukuran waktu
-    double cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
-    printf("Execution time: %.2f ms\n", cpu_time_used * 1000);
+    // Task 3
+    for (int i = 1; i <= loop; i++) {
+        printf("Task 3 - Loop iteration: %d\n", i);
+    }
+    printf("Task 3 completed\n");
+
+    // Task 4
+    for (int i = 1; i <= loop; i++) {
+        printf("Task 4 - Loop iteration: %d\n", i);
+    }
+    printf("Task 4 completed\n");
+
+    // Task 5
+    for (int i = 1; i <= loop; i++) {
+        printf("Task 5 - Loop iteration: %d\n", i);
+    }
+    printf("Task 5 completed\n");
+
+    printf("All tasks completed.\n");
+
+    clock_t end_time = clock(); // Akhiri pengukuran waktu
+    double execution_time = (double)(end_time - start_time) / CLOCKS_PER_SEC * 1000.0;
+    printf("Execution time: %.2f ms\n", execution_time);
 
     return 0;
 }
