@@ -35,7 +35,7 @@ def update_plot(frame, rects, steps, color_steps):
         rect.set_color(color)
 
 anim = animation.FuncAnimation(fig, func=update_plot, fargs=(bar_rects, steps, color_steps),
-                               frames=len(steps), interval=10, repeat=False)
+                               frames=len(steps), interval=1, repeat=False)
 
 plt.xlabel("Index")
 plt.ylabel("Value")
