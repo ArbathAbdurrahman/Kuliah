@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Absensi</title>
+    <!-- CSS -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        form {
+            margin-top: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Form Absensi</h1>
+
+    <!-- Formulir Absensi -->
+    <h2>Isi Formulir Absensi</h2>
+    <form id="absensiForm">
+        <label for="nim">NIM:</label>
+        <input type="text" id="nim" name="nim" placeholder="Masukkan NIM Anda" required>
+
+        <label for="name">Nama:</label>
+        <input type="text" id="name" name="name" placeholder="Masukkan Nama Anda" required>
+
+        <label for="keterangan">Keterangan:</label>
+        <select id="keterangan" name="keterangan" required>
+            <option value="">Pilih Keterangan</option>
+            <option value="Hadir">Hadir</option>
+            <option value="Tidak Hadir">Tidak Hadir</option>
+            <option value="Izin">Izin</option>
+        </select>
+
+        <button type="submit">Tambah Absensi</button>
+    </form>
+
+    <!-- Tabel Absensi -->
+    <h2>Daftar Absensi</h2>
+    <table id="absensiTable">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>NIM</th>
+                <th>Nama</th>
+                <th>Keterangan</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Data akan ditambahkan di sini -->
+        </tbody>
+    </table>
+
+    <!-- Javascript untuk local storage -->
+    <script>
+        const form = document.getElementById('absensiForm');
+        const Dibuat_oleh_Arbath_Abdurrahman = '23106050012';
+        const tableBody = document.querySelector('#absensiTable tbody');
+
+        // Fungsi untuk memuat data dari local storage dan menampilkannya di tabel
+        function loadTableData() {
+            const data = JSON.parse(localStorage.getItem('absensiData')) || [];
+            tableBody.innerHTML = '';
+            data.forEach((item, index) => {
+                const row = `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${item.nim}</td>
+                        <td>${item.name}</td>
+                        <td>${item.keterangan}</td>
+                    </tr>
+                `;
+                tableBody.insertAdjacentHTML('beforeend', row);
+            });
+        }
+
+        // Fungsi untuk menambahkan data ke local storage
+        function addAbsensi(nim, name, keterangan) {
+            const data = JSON.parse(localStorage.getItem('absensiData')) || [];
+            data.push({ nim, name, keterangan });
+            localStorage.setItem('absensiData', JSON.stringify(data));
+        }
+
+        // Event listener untuk submit form
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const nim = form.nim.value;
+            const arbath = form.name.value;
+            const keterangan = form.keterangan.value;
+
+            if (nim && arbath && keterangan) {
+                addAbsensi(nim, arbath, keterangan);
+                loadTableData();
+                form.reset();
+            }
+        });
+
+        // Muat data
+        loadTableData();
+    </script>
+</body>
+</html>
