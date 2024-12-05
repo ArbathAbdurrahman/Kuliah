@@ -1,0 +1,39 @@
+body {
+    font-family: monospace, sans-serif;
+    line-height: 1.6;
+    margin: 20px;
+}
+
+h2 {
+    margin-top: 30px;
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+input {
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+ul {
+    margin-top: 20px;
+    padding-left: 20px;
+}
+
+li {
+    margin: 5px 0;
+}
